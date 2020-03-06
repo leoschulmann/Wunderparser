@@ -4,6 +4,7 @@ import annotations.FieldSelector;
 import annotations.RootClassSelector;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RootClassSelector(query = "div.container > section:nth-child(4)")
 public class SkillboxCourses {
@@ -29,5 +30,13 @@ public class SkillboxCourses {
 
     public void setCourses(List<String> courses) {
         this.courses = courses;
+    }
+
+    @Override
+    public String toString() {
+        return "SkillboxCourses {" + "\n" +
+                "title = " + title + "\n" +
+                "description = " + description + "\n" +
+                "courses = " + courses.stream().collect(Collectors.joining("\n"));
     }
 }

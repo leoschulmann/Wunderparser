@@ -14,5 +14,6 @@ public class Main {
         SkillboxCourses sc = (SkillboxCourses) parser.parse(
                 "model.SkillboxCourses",
                 new URL("https://skillbox.ru/"));
+        System.out.println(sc);
     }
 }

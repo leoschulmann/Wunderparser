@@ -44,7 +44,6 @@ public class Parser {
             Object argument = css2oop(fieldElements, field.getType());
             setArgument(rootClass, rootObject, field, argument);
         }
-        System.out.println();
         return rootObject;
     }
 
@@ -88,24 +87,4 @@ public class Parser {
         return parser;
     }
 
-//    private static Object parseField(Class<?> clazz, Field f, Elements elements) {
-//        //for each field get selector, find data...
-//        String query = f.getAnnotation(FieldSelector.class).query();
-//        Elements data = elements.select(query);
-//        String preParseMethodName = "preParse"
-//                + f.getName().substring(0, 1).toUpperCase()
-//                + f.getName().substring(1);
-//        try {
-//            //...  pass all found data to special method in class
-//            return clazz.getMethod(preParseMethodName).invoke(data);
-//        } catch (IllegalAccessException e) {
-//            e.printStackTrace();
-//        } catch (InvocationTargetException e) {
-//            e.printStackTrace();
-//        } catch (NoSuchMethodException e) {
-//            e.printStackTrace();
-//        }
-//        //... if no special method in class defined return object???
-//        return null;
-//    }
 }

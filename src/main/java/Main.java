@@ -11,9 +11,7 @@ public class Main {
             NoSuchMethodException, InstantiationException, IllegalAccessException {
 
         Parser parser = Parser.getInstance();
-        SkillboxCourses sc = (SkillboxCourses) parser.parse(
-                "model.SkillboxCourses",
-                new URL("https://skillbox.ru/"));
+        SkillboxCourses sc = parser.parse(SkillboxCourses.class, new URL("https://skillbox.ru/"));
         System.out.println(sc);
     }
 }

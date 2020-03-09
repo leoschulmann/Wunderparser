@@ -14,8 +14,8 @@ public class SkillboxCourses {
     @FieldSelector(query = "header > p")
     String description;
 
-    @FieldSelector(query = "div > a > div > b")
-    List<String> courses;
+    @FieldSelector(query = "div > a > div")
+    List<SkillboxCourse> coursesObjs;
 
     public SkillboxCourses() {
     }
@@ -28,8 +28,8 @@ public class SkillboxCourses {
         this.description = description;
     }
 
-    public void setCourses(List<String> courses) {
-        this.courses = courses;
+    public void setCoursesObjs(List<SkillboxCourse> coursesObjs) {
+        this.coursesObjs = coursesObjs;
     }
 
     @Override
@@ -37,6 +37,9 @@ public class SkillboxCourses {
         return "SkillboxCourses {" + "\n" +
                 "title = " + title + "\n" +
                 "description = " + description + "\n" +
-                "courses = " + courses.stream().collect(Collectors.joining("\n"));
+                "courses = " + coursesObjs
+                .stream()
+                .map(e -> e.toString())
+                .collect(Collectors.joining("\n-----------------\n"));
     }
 }

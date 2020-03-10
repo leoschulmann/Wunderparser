@@ -4,7 +4,7 @@ import org.jsoup.select.Elements;
 
 import java.lang.reflect.Type;
 
-public class IntMapper implements Mapper<Integer, Elements, Type[], Class<?>> {
+public class IntMapper implements Mapper<Integer> {
     @Override
     public Integer doMap(Elements elements, Type[] params, Class<?> clazz) {
         return Integer.parseInt(elements.eq(0).text());

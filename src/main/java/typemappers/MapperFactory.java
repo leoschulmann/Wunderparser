@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MapperFactory {
-    static private List<Mapper<?, ?, ?, ?>> mappers = new ArrayList<>();
+    static private List<Mapper<?>> mappers = new ArrayList<>();
 
     private MapperFactory() {
     }
@@ -18,11 +18,10 @@ public class MapperFactory {
         // add more
     }
 
-    static public <ReturnType, SelectElements, ParamTypes, Clazz>
-    Mapper<ReturnType, SelectElements, ParamTypes, Clazz> chooseMapper(Class<?> clazz) {
-        for (Mapper<?, ?, ?, ?> mapper : mappers) {
+    static public <T> Mapper<T> chooseMapper(Class<?> clazz) {
+        for (Mapper<?> mapper : mappers) {
             if (mapper.canMap(clazz)) {
-                return (Mapper<ReturnType, SelectElements, ParamTypes, Clazz>) mapper;
+                return (Mapper<T>) mapper;
             }
         }
         return null;

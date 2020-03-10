@@ -4,7 +4,7 @@ import org.jsoup.select.Elements;
 
 import java.lang.reflect.Type;
 
-public class StringMapper implements Mapper<String, Elements, Type[], Class<?>> {
+public class StringMapper implements Mapper<String> {
     @Override
     public String doMap(Elements elements, Type[] types, Class<?> aClass) {
         return elements.eq(0).text();

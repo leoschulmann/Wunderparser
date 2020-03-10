@@ -7,7 +7,7 @@ import org.jsoup.select.Elements;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
-public class ObjectMapper implements Mapper<Object, Elements, Type[], Class<?>> {
+public class ObjectMapper implements Mapper<Object> {
     @Override
     public Object doMap(Elements elems, Type[] types, Class<?> aClass) {
         try {

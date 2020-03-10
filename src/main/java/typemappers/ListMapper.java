@@ -6,7 +6,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListMapper implements Mapper<List<?>, Elements, Type[], Class<?>> {
+public class ListMapper implements Mapper<List<?>> {
     @Override
     public List<?> doMap(Elements elements, Type[] types, Class<?> aClass) {
         List<Object> list = new ArrayList<>();

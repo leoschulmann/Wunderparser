@@ -3,8 +3,8 @@ import annotations.RootClassSelector;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import typemappers.Mapper;
 import typemappers.MapperFactory;
+import typemappers.Util;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -38,13 +38,13 @@ public class Parser {
                 String fieldSelector = field.getAnnotation(FieldSelector.class).query();
                 Elements fieldElements = elements.select(fieldSelector);
                 Class<?> aClass = field.getType();
-                Type[] paramTypes = Mapper.checkParametrizedType(field);
+                Type[] paramTypes = Util.checkParametrizedType(field);
 
                 Object argument = MapperFactory
                         .chooseMapper(aClass)
                         .doMap(fieldElements, paramTypes, aClass);
 
-                Mapper.setArgument(rootClass, rootObject, field, argument);
+                Util.setArgument(rootClass, rootObject, field, argument);
             }
             return rootObject;
         } catch (Exception e) {

@@ -18,7 +18,7 @@ public class MapperFactory {
         // add more
     }
 
-    static public <T> Mapper<T> chooseMapper(Class<?> clazz) {
+    public static  <T> Mapper<T> chooseMapper(Class<?> clazz) {
         for (Mapper<?> mapper : mappers) {
             if (mapper.canMap(clazz)) {
                 return (Mapper<T>) mapper;

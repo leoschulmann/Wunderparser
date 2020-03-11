@@ -18,12 +18,12 @@ public class ObjectMapper implements Mapper<Object> {
                 }
                 String fieldSelector = aField.getAnnotation(FieldSelector.class).query();
                 Elements fieldElements = elems.select(fieldSelector);
-                Type[] paramTypes = Mapper.checkParametrizedType(aField);
+                Type[] paramTypes = Util.checkParametrizedType(aField);
                 Object argument = MapperFactory
                         .chooseMapper(aField.getType())
                         .doMap(fieldElements, paramTypes, aField.getType());
 
-                Mapper.setArgument(aClass, anObject, aField, argument);
+                Util.setArgument(aClass, anObject, aField, argument);
             }
             return anObject;
         } catch (Exception e) {

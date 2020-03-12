@@ -3,7 +3,7 @@ package model;
 import annotations.ClassSelector;
 import annotations.FieldSelector;
 
-@ClassSelector(query = "div > a > div")
+@ClassSelector
 public class SkillboxCourse {
     @FieldSelector(query = "b")
     String name;

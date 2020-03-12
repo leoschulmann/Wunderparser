@@ -8,14 +8,14 @@ import java.util.List;
 
 public class ListMapper implements Mapper<List<?>> {
     @Override
-    public List<?> doMap(Elements elements, Type[] types, Class<?> aClass) {
+    public List<?> doMap(Elements elements, Type[] types, Class<?> aClass, String mode) {
         List<Object> list = new ArrayList<>();
         for (int i = 0; i < elements.size(); i++) {
             try {
                 Class<?> clazz = Class.forName(types[0].getTypeName());
                 Object argument = MapperFactory
-                        .chooseMapper(clazz)
-                        .doMap(elements.eq(i), null, clazz);
+                        .getMapper(clazz)
+                        .doMap(elements.eq(i), null, clazz, mode);
                 list.add(argument);
             } catch (Exception e) {
                 e.printStackTrace();

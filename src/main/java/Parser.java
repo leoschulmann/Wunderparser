@@ -39,10 +39,10 @@ public class Parser {
                 Elements fieldElements = elements.select(fieldSelector);
                 Class<?> aClass = field.getType();
                 Type[] paramTypes = Util.checkParametrizedType(field);
-
+                String mode = field.getAnnotation(FieldSelector.class).mode();
                 Object argument = MapperFactory
-                        .chooseMapper(aClass)
-                        .doMap(fieldElements, paramTypes, aClass);
+                        .getMapper(aClass)
+                        .doMap(fieldElements, paramTypes, aClass, mode);
 
                 Util.setArgument(rootClass, rootObject, field, argument);
             }

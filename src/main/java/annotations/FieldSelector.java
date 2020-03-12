@@ -9,5 +9,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FieldSelector {
 
-    public String query();
+    String query();
+
+    String mode() default "text";
 }

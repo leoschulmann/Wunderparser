@@ -9,7 +9,7 @@ import java.lang.reflect.Type;
 
 public class ObjectMapper implements Mapper<Object> {
     @Override
-    public Object doMap(Elements elems, Type[] types, Class<?> aClass) {
+    public Object doMap(Elements elems, Type[] types, Class<?> aClass, String mode) {
         try {
             Object anObject = aClass.getConstructor().newInstance();
             for (Field aField : aClass.getDeclaredFields()) {
@@ -19,9 +19,10 @@ public class ObjectMapper implements Mapper<Object> {
                 String fieldSelector = aField.getAnnotation(FieldSelector.class).query();
                 Elements fieldElements = elems.select(fieldSelector);
                 Type[] paramTypes = Util.checkParametrizedType(aField);
+                String aMode = aField.getAnnotation(FieldSelector.class).mode();
                 Object argument = MapperFactory
-                        .chooseMapper(aField.getType())
-                        .doMap(fieldElements, paramTypes, aField.getType());
+                        .getMapper(aField.getType())
+                        .doMap(fieldElements, paramTypes, aField.getType(), aMode);
 
                 Util.setArgument(aClass, anObject, aField, argument);
             }

@@ -1,5 +1,6 @@
 import annotations.FieldSelector;
 import annotations.RootClassSelector;
+import converters.Converter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -39,10 +40,10 @@ public class Parser {
                 Elements fieldElements = elements.select(fieldSelector);
                 Class<?> aClass = field.getType();
                 Type[] paramTypes = Util.checkParametrizedType(field);
-                String mode = field.getAnnotation(FieldSelector.class).mode();
+                Class<? extends Converter> conClass = field.getAnnotation(FieldSelector.class).converter();
                 Object argument = MapperFactory
                         .getMapper(aClass)
-                        .doMap(fieldElements, paramTypes, aClass, mode);
+                        .doMap(fieldElements, paramTypes, aClass, conClass);
 
                 Util.setArgument(rootClass, rootObject, field, argument);
             }

@@ -23,4 +23,12 @@ public class Coordinate {
         m.find();
         this.longitude = m.group(0);
     }
+
+    @Override
+    public String toString() {
+        return "Coordinate{" +
+                "latitude='" + latitude + '\'' +
+                ", longitude='" + longitude + '\'' +
+                '}';
+    }
 }

@@ -1,5 +1,6 @@
 package typemappers;
 
+import converters.Converter;
 import org.jsoup.select.Elements;
 
 import java.lang.reflect.Type;
@@ -8,18 +9,14 @@ import java.util.List;
 
 public class ListMapper implements Mapper<List<?>> {
     @Override
-    public List<?> doMap(Elements elements, Type[] types, Class<?> aClass, String mode) {
+    public List<?> doMap(Elements elements, Type[] types, Class<?> aClass, Class<? extends Converter> conClass) throws Exception {
         List<Object> list = new ArrayList<>();
         for (int i = 0; i < elements.size(); i++) {
-            try {
-                Class<?> clazz = Class.forName(types[0].getTypeName());
-                Object argument = MapperFactory
-                        .getMapper(clazz)
-                        .doMap(elements.eq(i), null, clazz, mode);
-                list.add(argument);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            Class<?> clazz = Class.forName(types[0].getTypeName());
+            Object argument = MapperFactory
+                    .getMapper(clazz)
+                    .doMap(elements.eq(i), null, clazz, conClass);
+            list.add(argument);
         }
         return list;
     }

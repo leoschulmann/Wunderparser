@@ -23,4 +23,12 @@ public class SpbMetroWiki {
     public void setLines(Set<SpbMetroLine> lines) {
         this.lines = lines;
     }
+
+    @Override
+    public String toString() {
+        return "SpbMetroWiki{" +
+                "stations=" + stations +
+                ", \nlines=" + lines +
+                '}';
+    }
 }

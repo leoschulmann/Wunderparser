@@ -2,12 +2,14 @@ package model;
 
 import annotations.ClassSelector;
 import annotations.FieldSelector;
+import converters.StyleConverter;
+import converters.TitleConverter;
 
 @ClassSelector
 public class SpbMetroLine {
-    @FieldSelector(query = "td:nth-child(1)", mode = "style")
+    @FieldSelector(query = "td:nth-child(1)", converter = StyleConverter.class)
     String color;
-    @FieldSelector(query = "td:nth-child(1) > a", mode = "title")
+    @FieldSelector(query = "td:nth-child(1) > a", converter = TitleConverter.class)
     String name;
 
     public void setColor(String color) {
@@ -40,5 +42,13 @@ public class SpbMetroLine {
         int result = color != null ? color.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "SpbMetroLine{" +
+                "color='" + color + '\'' +
+                ", name='" + name + '\'' +
+                '}'+"\n";
     }
 }

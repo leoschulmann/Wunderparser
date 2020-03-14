@@ -1,5 +1,8 @@
 package annotations;
 
+import converters.Converter;
+import converters.TextConverter;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -11,5 +14,5 @@ public @interface FieldSelector {
 
     String query();
 
-    String mode() default "text";
+    Class<? extends Converter> converter() default TextConverter.class;
 }

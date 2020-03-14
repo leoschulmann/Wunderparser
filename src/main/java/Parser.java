@@ -40,10 +40,13 @@ public class Parser {
                 Elements fieldElements = elements.select(fieldSelector);
                 Class<?> aClass = field.getType();
                 Type[] paramTypes = Util.checkParametrizedType(field);
-                Class<? extends Converter> conClass = field.getAnnotation(FieldSelector.class).converter();
+                Converter<?> converter = field
+                        .getAnnotation(FieldSelector.class)
+                        .converter()
+                        .getConstructor().newInstance();
                 Object argument = MapperFactory
                         .getMapper(aClass)
-                        .doMap(fieldElements, paramTypes, aClass, conClass);
+                        .doMap(fieldElements, paramTypes, aClass, converter);
 
                 Util.setArgument(rootClass, rootObject, field, argument);
             }

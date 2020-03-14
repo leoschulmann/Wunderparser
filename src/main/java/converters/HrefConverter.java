@@ -2,7 +2,7 @@ package converters;
 
 import org.jsoup.select.Elements;
 
-public class HrefConverter implements Converter {
+public class HrefConverter implements Converter<String> {
 
     @Override
     public String convert(Elements elements) {

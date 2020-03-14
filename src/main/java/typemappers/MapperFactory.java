@@ -16,16 +16,18 @@ public class MapperFactory {
         mappers.add(new ListMapper());
         mappers.add(new SetMapper());
         mappers.add(new MapMapper());
-
-        // add more
     }
 
-    public static  <T> Mapper<T> getMapper(Class<?> clazz) {
+    public static <T> Mapper<T> getMapper(Class<?> clazz) {
         for (Mapper<?> mapper : mappers) {
             if (mapper.canMap(clazz)) {
                 return (Mapper<T>) mapper;
             }
         }
         return null;
+    }
+
+     public static void addCustomMapper(Mapper<?> mapper) {
+        mappers.add(mapper);
     }
 }

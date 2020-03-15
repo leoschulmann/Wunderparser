@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="WARN">
+
+    <appenders>
+        <File name="errors2File" fileName="logs/errors.log">
+            <PatternLayout pattern="%d{dd MMM yyyy HH:mm:ss} %msg%n"/>
+        </File>
+    </appenders>
+
+    <loggers>
+        <root level="trace">
+            <appender-ref ref="errors2File" level="ERROR"/>
+        </root>
+    </loggers>
+</configuration>

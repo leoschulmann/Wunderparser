@@ -1,6 +1,8 @@
 import annotations.FieldSelector;
 import annotations.RootClassSelector;
 import converters.Converter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -18,6 +20,7 @@ import java.nio.file.Paths;
 public class Parser {
     final static Path HTMLcache = Paths.get("src/main/resources/webpage.html");
     private static Parser parser;
+    private static Logger logger;
 
     private Parser() {
     }
@@ -52,6 +55,7 @@ public class Parser {
             }
             return rootObject;
         } catch (Exception e) {
+            logger.error(e);
             throw new RuntimeException(e);
         }
     }
@@ -67,6 +71,7 @@ public class Parser {
     public static Parser getInstance() {
         if (parser == null) {
             parser = new Parser();
+            logger = LogManager.getRootLogger();
         }
         return parser;
     }

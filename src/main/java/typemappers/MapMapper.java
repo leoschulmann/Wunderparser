@@ -21,7 +21,7 @@ public class MapMapper implements Mapper<Map<?, ?>> {
             Map<Object, Object> map = new LinkedHashMap<>();
             for (int i = 0; i < jsoupElmnts[0].size(); i++) {
                 Object key = keyMapper.doMap(new Elements[] {jsoupElmnts[0].eq(i)}, null, keyClass, new Converter[] {converter[0]});
-                Object value = valueMapper.doMap(new Elements[] {jsoupElmnts[1].eq(i)}, null, keyClass, new Converter[] {converter[1]});
+                Object value = valueMapper.doMap(new Elements[] {jsoupElmnts[1].eq(i)}, null, valClass, new Converter[] {converter[1]});
                 map.put(key, value);
             }
             return map;

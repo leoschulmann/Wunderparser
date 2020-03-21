@@ -1,20 +1,20 @@
-package model;
+package TestModels;
 
-import annotations.FieldSelector;
-import annotations.RootClassSelector;
+import annotations.MapSelector;
+import annotations.Selector;
 
 import java.util.Map;
 import java.util.Set;
 
-@RootClassSelector(query = "div > table.wikitable.sortable > tbody")
+@Selector(query = "div > table.wikitable.sortable > tbody", root = true)
 public class SpbMetroWiki {
 
-    @FieldSelector(
-            query = " tr > td:nth-child(2) > a,  tr > td:nth-child(6) > small > span > span")
+    @MapSelector(keyQuery = "tr > td:nth-child(2) > a",
+            valueQuery = "tr > td:nth-child(6) > small > span > span")
     public Map<String, Coordinate> stations;
 
-    @FieldSelector(query = "tr")
-    Set<SpbMetroLine> lines;
+    @Selector(query = "tr")
+   public Set<SpbMetroLine> lines;
 
     public void setStations(Map<String, Coordinate> stations) {
         this.stations = stations;
@@ -26,7 +26,7 @@ public class SpbMetroWiki {
 
     @Override
     public String toString() {
-        return "SpbMetroWiki{" +
+        return "TestModels.SpbMetroWiki{" +
                 "stations=" + stations +
                 ", \nlines=" + lines +
                 '}';

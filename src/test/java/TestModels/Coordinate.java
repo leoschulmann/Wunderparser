@@ -1,15 +1,14 @@
-package model;
+package TestModels;
 
-import annotations.ClassSelector;
-import annotations.FieldSelector;
+import annotations.Selector;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@ClassSelector
+@Selector(entity = true)
 public class Coordinate {
-    @FieldSelector(query = "a")
-    String latitude;
+    @Selector(query = "a")
+   public String latitude;
 
     //intentionally no annotation
     String longitude;
@@ -26,7 +25,7 @@ public class Coordinate {
 
     @Override
     public String toString() {
-        return "Coordinate{" +
+        return "TestModels.Coordinate{" +
                 "latitude='" + latitude + '\'' +
                 ", longitude='" + longitude + '\'' +
                 '}';

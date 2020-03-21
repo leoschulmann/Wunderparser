@@ -1,15 +1,14 @@
-package model;
+package TestModels;
 
-import annotations.ClassSelector;
-import annotations.FieldSelector;
+import annotations.Selector;
 import converters.StyleConverter;
 import converters.TitleConverter;
 
-@ClassSelector
+@Selector(entity = true)
 public class SpbMetroLine {
-    @FieldSelector(query = "td:nth-child(1)", converter = StyleConverter.class)
+    @Selector(query = "td:nth-child(1)", converter = StyleConverter.class)
     String color;
-    @FieldSelector(query = "td:nth-child(1) > a", converter = TitleConverter.class)
+    @Selector(query = "td:nth-child(1) > a", converter = TitleConverter.class)
     String name;
 
     public void setColor(String color) {
@@ -46,7 +45,7 @@ public class SpbMetroLine {
 
     @Override
     public String toString() {
-        return "SpbMetroLine{" +
+        return "TestModels.SpbMetroLine{" +
                 "color='" + color + '\'' +
                 ", name='" + name + '\'' +
                 '}'+"\n";

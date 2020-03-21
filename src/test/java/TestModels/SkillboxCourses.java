@@ -1,21 +1,20 @@
-package model;
+package TestModels;
 
-import annotations.FieldSelector;
-import annotations.RootClassSelector;
+import annotations.Selector;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RootClassSelector(query = "div.container > section:nth-child(4)")
+@Selector(query = "div.container > section:nth-child(4)", root = true)
 public class SkillboxCourses {
-    @FieldSelector(query = "header > h2")
-    String title;
+    @Selector(query = "header > h2")
+    public String title;
 
-    @FieldSelector(query = "header > p")
-    String description;
+    @Selector(query = "header > p")
+    public String description;
 
-    @FieldSelector(query = "div > a > div")
-    List<SkillboxCourse> coursesObjs;
+    @Selector(query = "div > a > div")
+    public List<SkillboxCourse> coursesObjs;
 
     public SkillboxCourses() {
     }

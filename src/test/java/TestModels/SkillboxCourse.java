@@ -1,17 +1,16 @@
-package model;
+package TestModels;
 
-import annotations.ClassSelector;
-import annotations.FieldSelector;
+import annotations.Selector;
 
-@ClassSelector
+@Selector(entity = true)
 public class SkillboxCourse {
-    @FieldSelector(query = "b")
+    @Selector(query = "b")
     String name;
 
-    @FieldSelector(query = "span.tag.line-card__tag.hover-card__text")
+    @Selector(query = "span.tag.line-card__tag.hover-card__text")
     String type;
 
-    @FieldSelector(query = "span.duration.line-card__duration.hover-card__text")
+    @Selector(query = "span.duration.line-card__duration.hover-card__text")
     String length;
 
     public SkillboxCourse() {

@@ -8,8 +8,8 @@ import java.lang.reflect.Type;
 
 public class ObjectMapper implements Mapper<Object> {
     @Override
-    public Object doMap(Elements elems, Type[] types, Class<?> aClass, Converter converter) {
-        return Util.getObject(elems, aClass);
+    public Object doMap(Elements[] elems, Type[] types, Class<?> aClass, Converter[] converter) {
+        return Util.deserializeObject(elems[0], aClass);
     }
 
     @Override

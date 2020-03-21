@@ -1,5 +1,6 @@
 package typemappers;
 
+import annotations.MapSelector;
 import annotations.Selector;
 import converters.Converter;
 import org.jsoup.select.Elements;
@@ -30,19 +31,29 @@ public class Util {
         }
     }
 
-    public static Object getObject(Elements elems, Class<?> aClass) {
+    public static Object deserializeObject(Elements parentElements, Class<?> aClass) {
         try {
             Object anObject = aClass.getConstructor().newInstance();
             for (Field aField : aClass.getDeclaredFields()) {
-                if (!aField.isAnnotationPresent(Selector.class)) {
+                Elements[] fieldElements = null;
+                Converter<?>[] fieldConverters = null;
+                if (aField.isAnnotationPresent(Selector.class)) {
+                    fieldElements = new Elements[] {parentElements.select(aField.getAnnotation(Selector.class).query())};
+                    fieldConverters = new Converter<?>[] {aField.getAnnotation(Selector.class).converter().getConstructor().newInstance()};
+                } else if (aField.isAnnotationPresent(MapSelector.class)) {
+                    fieldElements = new Elements[2];
+                    fieldElements[0] = parentElements.select(aField.getAnnotation(MapSelector.class).keyQuery());
+                    fieldElements[1] = parentElements.select(aField.getAnnotation(MapSelector.class).valueQuery());
+                    fieldConverters = new Converter<?>[2];
+                    fieldConverters[0] = aField.getAnnotation(MapSelector.class).keyConverter().getConstructor().newInstance();
+                    fieldConverters[1] = aField.getAnnotation(MapSelector.class).valueConverter().getConstructor().newInstance();
+                } else {
                     continue;
                 }
-                Elements fieldElements = getElements(elems, aField);
                 Type[] paramTypes = Util.checkParametrizedType(aField);
-                Converter<?> fieldConverter = getFieldConverter(aField);
                 Mapper<?> mapper = MapperFactory.getMapper(aField.getType());
                 Object argument = mapper.doMap(fieldElements, paramTypes,
-                        aField.getType(), fieldConverter);
+                        aField.getType(), fieldConverters);
                 Util.setArgument(aClass, anObject, aField, argument);
             }
             return anObject;
@@ -51,17 +62,4 @@ public class Util {
         }
     }
 
-    private static Elements getElements(Elements elems, Field aField) {
-        String fieldSelector = aField.getAnnotation(Selector.class).query();
-        return elems.select(fieldSelector);
-    }
-
-    private static Converter<?> getFieldConverter(Field aField) {
-        try {
-            return aField.getAnnotation(Selector.class)
-                    .converter().getConstructor().newInstance();
-        } catch (ReflectiveOperationException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

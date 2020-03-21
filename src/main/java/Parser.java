@@ -27,7 +27,7 @@ public class Parser {
             Document html = getDocument(url);
             String rootquery = rootClass.getAnnotation(Selector.class).query();
             Elements rootElements = html.select(rootquery);
-            return (T) Util.getObject(rootElements, rootClass);
+            return (T) Util.deserializeObject(rootElements, rootClass);
     }
 
     private Document getDocument(URL url) throws IOException {

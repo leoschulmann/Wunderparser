@@ -7,8 +7,8 @@ import java.lang.reflect.Type;
 
 public class IntMapper implements Mapper<Integer> {
     @Override
-    public Integer doMap(Elements elements, Type[] params, Class<?> clazz, Converter converter) {
-        return (Integer) converter.convert(elements);
+    public Integer doMap(Elements[] elements, Type[] params, Class<?> clazz, Converter[] converter) {
+        return (Integer) converter[0].convert(elements[0]);
     }
 
     @Override

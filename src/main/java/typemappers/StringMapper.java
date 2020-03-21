@@ -7,8 +7,8 @@ import java.lang.reflect.Type;
 
 public class StringMapper implements Mapper<String> {
     @Override
-    public String doMap(Elements elements, Type[] types, Class<?> aClass, Converter converter) {
-        return (String) converter.convert(elements);
+    public String doMap(Elements[] elements, Type[] types, Class<?> aClass, Converter[] converter) {
+        return (String) converter[0].convert(elements[0]);
     }
 
     @Override

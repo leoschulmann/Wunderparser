@@ -13,7 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Parser {
-    final static Path HTMLcache = Paths.get("src/main/resources/webpage.html");
+    final static String CACHE_LOCATION = "src/main/resources/cache/";
     private static Parser parser;
     private static Logger logger;
 
@@ -31,11 +31,13 @@ public class Parser {
     }
 
     private Document getDocument(URL url) throws IOException {
-        if (!Files.exists(HTMLcache)) {
+        String hash = String.valueOf(url.hashCode());
+        Path pathToCache = Paths.get(CACHE_LOCATION + hash + ".html");
+        if (!Files.exists(pathToCache)) {
             String html = Jsoup.connect(url.toString()).maxBodySize(0).get().html();
-            Files.write(HTMLcache, html.getBytes());
+            Files.write(pathToCache, html.getBytes());
         }
-        return Jsoup.parse(HTMLcache.toFile(), "UTF-8", url.toString());
+        return Jsoup.parse(pathToCache.toFile(), "UTF-8", url.toString());
     }
 
     public static Parser getInstance() {
